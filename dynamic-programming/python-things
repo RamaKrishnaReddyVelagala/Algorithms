@@ -1,0 +1,6 @@
+# OR
+# n =3
+# m =4
+# if n == 5 or 4:
+#     print(n)
+# Never write in the above manner, it is acting weird adn taking throwing true.

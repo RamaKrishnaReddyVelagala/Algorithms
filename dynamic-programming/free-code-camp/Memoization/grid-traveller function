@@ -1,0 +1,35 @@
+"""
+# Traveller -how many can he moved in m*n 
+
+def gridtraveller(m,n):
+    if (m == 1 and n == 1):
+        return 1
+    if (m == 0 or n == 0):
+        return 0
+    return gridtraveller(m-1,n) + gridtraveller(m,n-1)
+
+
+print(gridtraveller(2,3)) # 18
+
+# Time complexity: O(2^(n+m))
+# space complexity O(n+m)
+"""
+
+# Memoization
+
+def gridtraveller(m,n, memo = {}):
+    key = str(m) + "," + str(n)
+    if (m == 1 and n == 1):
+        return 1
+    if (m == 0 or n == 0):
+        return 0
+    if key in memo:
+        memo[key]
+    memo[key] = gridtraveller(m-1,n, memo) + gridtraveller(m,n-1, memo)
+    return memo[key]
+
+# print(gridtraveller(2,3)) # 18
+print(gridtraveller(15,15))
+
+# Time complexity: O(n+m)
+# space complexity O(n+m)
