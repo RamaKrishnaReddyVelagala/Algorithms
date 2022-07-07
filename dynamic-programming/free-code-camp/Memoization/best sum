@@ -1,0 +1,72 @@
+# write a fn. bestsum(targetsum, numbers) that takes in a targetsum and an array of numbers as arguments.
+# The fn. should return an array containing the shortest combination of numbers that add up to exactly the targetsum.
+# If there is a tie for the shortest combination, you may return any of the shortest.
+# had major issue with list copying.
+"""
+def bestsum(targetsum, numbers):
+    # base cases
+    # Logic
+    #final return value
+    if targetsum == 0:
+        return []
+    if targetsum < 0:
+        return None
+    
+    shortest_combination = None
+    for value in numbers:
+        remainder = bestsum(targetsum-value, numbers)
+        if remainder is not None:
+            remainder.append(value)
+            # if remainder is shorter than shortes_combination then update it.
+            # fix the null issue
+            if shortest_combination is None:
+                shortest_combination = remainder
+            if len(remainder) < len(shortest_combination):
+                shortest_combination = remainder
+    
+    return shortest_combination
+
+
+
+print(bestsum(7, [2,3]))
+print(bestsum(7, [5,3,4,7]))
+print(bestsum(7, [4,2]))
+# print(bestsum(300, [7,14]))
+print(bestsum(100, [1,2,5,25]))
+
+"""
+
+
+# after memoization.
+def bestsum(targetsum, numbers, memo={}):
+    # base cases
+    # Logic
+    #final return value
+    if targetsum in memo:
+        return memo[targetsum]
+    if targetsum == 0:
+        return []
+    if targetsum < 0:
+        return None
+    
+    shortest_combination = None
+    for value in numbers: 
+        remainder = bestsum(targetsum-value, numbers, memo)
+        if remainder is not None:
+            rem = remainder.copy()
+            rem.append(value)
+            # if remainder is shorter than shortest_combination then update it.
+            # fix the null issue
+            if shortest_combination is None or len(rem) < len(shortest_combination):
+                shortest_combination = rem.copy()
+    
+    memo[targetsum] = shortest_combination.copy()
+    return memo[targetsum]
+
+
+
+# print(bestsum(7, [2,3]))
+# print(bestsum(7, [5,3,4,7]))
+# print(bestsum(7, [4,2]))
+# print(bestsum(300, [7,14]))
+print(bestsum(100, [1,2,5,25]))
