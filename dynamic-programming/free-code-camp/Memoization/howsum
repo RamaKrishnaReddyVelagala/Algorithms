@@ -1,0 +1,57 @@
+# there are some cahcing issue, using python time, sleep
+import time
+"""
+def howsum(targetsum, numbers):
+    if targetsum == 0:
+        return []
+    if targetsum < 0:
+        return None
+    
+    for value in numbers:
+        remainder = howsum(targetsum-value, numbers)
+        if remainder is not None:
+            remainder.append(value)
+            return  remainder
+    
+    return None
+
+print(howsum(7, [2,3]))
+print(howsum(7, [5,3,4,7]))
+print(howsum(7, [4,2]))
+# print(howsum(300, [7,14]))
+
+# time complexity: O(n^m)
+# n = numbers.length  width
+# m = depth of stack. height.
+#space complexity: o(m)
+
+"""
+
+# memoization.
+
+def howsum(targetsum, numbers, memo={}):
+    if targetsum in memo:
+        return memo[targetsum]
+    if targetsum == 0:
+        return []
+    if targetsum < 0:
+        return None
+    for value in numbers:
+        remainder = howsum((targetsum-value), numbers, memo)
+        if remainder is not None:
+            remainder.append(value)
+            memo[targetsum] = remainder
+            return  memo[targetsum]
+    
+    memo[targetsum] = None
+    return None
+
+
+print(howsum(7, [2,3]))
+time.sleep(3)
+print(howsum(8, [5,3,4,7]))
+time.sleep(3)
+print(howsum(7, [4,2]))
+time.sleep(3)
+print(howsum(300, [5,7,14]))
+time.sleep(3)

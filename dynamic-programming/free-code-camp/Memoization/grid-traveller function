@@ -28,8 +28,8 @@ def gridtraveller(m,n, memo = {}):
     memo[key] = gridtraveller(m-1,n, memo) + gridtraveller(m,n-1, memo)
     return memo[key]
 
-# print(gridtraveller(2,3)) # 18
-print(gridtraveller(15,15))
+print(gridtraveller(2,3)) # 18
+print(gridtraveller(18,18))
 
-# Time complexity: O(n+m)
+# Time complexity: O(n*m)
 # space complexity O(n+m)

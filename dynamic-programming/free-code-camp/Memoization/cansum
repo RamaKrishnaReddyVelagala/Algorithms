@@ -1,0 +1,38 @@
+# 
+"""
+def cansum(targetsum, numbers):
+    if targetsum == 0:
+        return True
+    if targetsum<0:
+        return False
+    for value in numbers:
+        if cansum(targetsum-value, numbers) == True:
+            return True
+    return False
+
+
+print(cansum(7, [2,3]))
+print(cansum(7, [5,3,4,7]))
+print(cansum(7, [4,2]))
+# print(cansum(300, [7,14]))
+"""
+# memoize it
+
+def cansum(targetsum, numbers, memo={}):
+    if targetsum in memo:
+        return memo[targetsum]
+    if targetsum == 0:
+        return         True
+    if targetsum<0:
+        return False
+    for value in numbers:
+        if cansum(targetsum-value, numbers, memo) == True:
+            return True
+    memo[targetsum] = False
+    return memo[targetsum]
+
+
+print(cansum(7, [2,3]))
+print(cansum(7, [5,3,4,7]))
+print(cansum(7, [4,2]))
+print(cansum(300, [7,14]))
